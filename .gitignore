@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+node_modules
+
+# Demo App (separate project)
+demo/
+
+# Build
+android/build/
+android/.gradle/
+android/app/build/
+*.iml
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# npm
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+lib/
+
+# AI agent process files
+.meta/
+
+# Test files (not published)
+__tests__/
+e2e/
+
+# Config files (local)
+android/local.properties
+
+# Lockfiles
+package-lock.json
+yarn.lock
+
+# Testing
+coverage/

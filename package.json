@@ -1,0 +1,45 @@
+{
+  "name": "react-native-gesture-password-android",
+  "version": "1.0.1",
+  "description": "A native Android pattern lock component for React Native, with same API as react-native-gesture-password. Android native only, iOS unsupported.",
+  "main": "src/index.js",
+  "files": [
+    "src/",
+    "android/src/main/",
+    "android/build.gradle",
+    "android/gradle.properties",
+    "android/gradle/",
+    "android/gradlew",
+    "react-native.config.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoxia-dev/react-native-gesture-password-android.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react-native",
+    "android",
+    "pattern",
+    "lock",
+    "gesture",
+    "password",
+    "gesture-password",
+    "pattern-lock",
+    "native",
+    "rn"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "react-native": "^0.63.5"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.63.0"
+  }
+}
