@@ -3,7 +3,7 @@ module.exports = {
     platforms: {
       android: {
         sourceDir: './android',
-        packageImportPath: 'import com.reactnativeandroipatternlocker.PatternLockerPackage;',
+        packageImportPath: 'import com.gesturepassword.PatternLockerPackage;',
         packageInstance: 'new PatternLockerPackage()',
       },
       ios: {} // explicitly empty for autolinking compatibility

@@ -100,7 +100,7 @@ class GesturePassword extends Component {
         ) : null}
         <NativePatternLocker
           {...nativeProps}
-          style={{ flex: 1 }}
+          style={[{ flex: 1 }, style]}
         />
         {this.props.children}
       </View>
