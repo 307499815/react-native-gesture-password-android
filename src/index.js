@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   requireNativeComponent,
   Platform,
-  processColor,
   View,
   Text,
 } from 'react-native';
@@ -75,9 +74,9 @@ class GesturePassword extends Component {
     const nativeProps = {
       ...rest,
       style: [{ flex: 1 }, style],
-      normalColor: normalColor ? processColor(normalColor) : undefined,
-      rightColor: rightColor ? processColor(rightColor) : undefined,
-      wrongColor: wrongColor ? processColor(wrongColor) : undefined,
+      normalColor: normalColor || '#5FA8FC',
+      rightColor: rightColor || '#5FA8FC',
+      wrongColor: wrongColor || '#D93609',
       onStartEvent: () => {
         onStart && onStart();
       },

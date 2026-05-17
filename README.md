@@ -1,4 +1,4 @@
-# react-native-gesture-password-android v1.0.1
+# react-native-gesture-password-android v1.0.3
 
 > Android 原生手势密码锁组件，API 与 react-native-gesture-password 兼容，Canvas 绘制高性能。
 
@@ -162,6 +162,10 @@ import GesturePassword from 'react-native-gesture-password-android';
 - [doc] 完善 README 版权声明（API 兼容性 + 完整 MIT 许可证正文）
 - [test] 老架构 Paper E2E 测试通过（Maestro + 模拟器）
 - [doc] 更新 README 阶段进度和任务状态
+
+### v1.0.3 (2026-05-16)
+- [fix] processColor 返回 null 时回退到 defaultProps 的默认颜色值
+- [test] 添加 TC14 自定义 normalColor E2E 测试用例
 
 ---
 

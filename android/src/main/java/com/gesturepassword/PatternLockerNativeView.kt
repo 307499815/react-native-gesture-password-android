@@ -111,7 +111,8 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
                 points[row][col] = Point(0f, 0f, row * 3 + col + 1)
             }
         }
-        setWillNotDraw(false) // ViewGroup default skips onDraw; force it
+        
+        setWillNotDraw(false)
         setBackgroundColor(bgColor) // Use View's own background instead of canvas.drawColor
     }
 

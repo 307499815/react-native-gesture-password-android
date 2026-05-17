@@ -1,5 +1,6 @@
 package com.gesturepassword
 
+import android.graphics.Color
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.common.MapBuilder
@@ -72,19 +73,25 @@ class PatternLockerViewManager : ViewGroupManager<PatternLockerNativeView>() {
         view.isError = status == "wrong"
     }
 
-    @ReactProp(name = "normalColor", customType = "Color")
-    fun setNormalColor(view: PatternLockerNativeView, color: Int?) {
-        color?.let { view.normalColor = it }
+    @ReactProp(name = "normalColor")
+    fun setNormalColor(view: PatternLockerNativeView, color: String?) {
+        if (color != null) {
+            try { view.normalColor = Color.parseColor(color) } catch(e: Exception) { }
+        }
     }
 
-    @ReactProp(name = "rightColor", customType = "Color")
-    fun setRightColor(view: PatternLockerNativeView, color: Int?) {
-        color?.let { view.hitColor = it }
+    @ReactProp(name = "rightColor")
+    fun setRightColor(view: PatternLockerNativeView, color: String?) {
+        if (color != null) {
+            try { view.hitColor = Color.parseColor(color) } catch(e: Exception) { }
+        }
     }
 
-    @ReactProp(name = "wrongColor", customType = "Color")
-    fun setWrongColor(view: PatternLockerNativeView, color: Int?) {
-        color?.let { view.errorColor = it }
+    @ReactProp(name = "wrongColor")
+    fun setWrongColor(view: PatternLockerNativeView, color: String?) {
+        if (color != null) {
+            try { view.errorColor = Color.parseColor(color) } catch(e: Exception) { }
+        }
     }
 
     @ReactProp(name = "allowCross")
