@@ -97,6 +97,7 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
     private var gridOffsetY = 0f
     private var squareSize = 0f
     private var outerStrokeWidth = 3f
+    private var density = 0f
 
     // ==== Touch listener interface ====
     var onPatternStart: (() -> Unit)? = null
@@ -127,23 +128,39 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
         val width = w.toFloat()
         val height = h.toFloat()
         val minDim = min(width, height)
+        density = resources.displayMetrics.density
+        android.util.Log.d("GestureSize", "w=" + w + " h=" + h + " density=" + density + " minDim=" + minDim + " radius=" + minDim/10)
 
-        // Use 80% of the smaller dimension as grid area
-        val gridArea = minDim * 0.8f
-        squareSize = gridArea / 3f
-        circleRadius = squareSize * 0.25f
-        innerCircleRadius = circleRadius * 0.35f
-        gridSpacing = squareSize
-        outerStrokeWidth = max(1f, circleRadius * 0.08f)
+        // 对齐 JS 版：JS 用 dp 值，Canvas 用 px 值，需要 density 换算
+        // JS borderWidth:2dp → px = 2 * density
+        // JS line height:1dp → px = 1 * density
+        outerStrokeWidth = 2f * density
+        linePaint.strokeWidth = 1f * density
+        activeLinePaint.strokeWidth = 1f * density
 
-        gridOffsetX = (width - gridArea) / 2f + squareSize / 2f
-        gridOffsetY = (height - gridArea) / 2f + squareSize / 2f
+        // 直接对齐 JS 版 react-native-gesture-password 算法
+        // JS: radius = width / 10; margin = radius
+        //     间距 = 3*radius
+        //     circles[i] = { x: col*3*r + margin + r, y: row*3*r + margin + r, r: radius }
+        //     九宫格总宽 = 8*radius，在 board 容器(宽=Width)中居中(左右各留 r)
+        val radius = minDim / 10f
+        circleRadius = radius
+        innerCircleRadius = radius * 0.33f
+        gridSpacing = radius * 3f
+        outerStrokeWidth = 3f
+        squareSize = gridSpacing
 
-        // Set actual positions
+        // 九宫格在 View 中居中（JS 版 board 容器宽=Width=10r，总宽=8r，左右各留 r）
+        // View 宽度 = minDim = 10r，所以直接使用 JS 版坐标即可居中
+        val offsetX = (width - minDim) / 2f  // 如果 View 不是正方形，水平居中
+        val offsetY = (height - minDim) / 2f  // 垂直居中
+
         for (row in 0..2) {
             for (col in 0..2) {
-                points[row][col].x = gridOffsetX + col * gridSpacing
-                points[row][col].y = gridOffsetY + row * gridSpacing
+                val x = col * (radius * 2f + radius) + radius + radius
+                val y = row * (radius * 2f + radius) + radius + radius
+                points[row][col].x = x + offsetX
+                points[row][col].y = y + offsetY
             }
         }
     }
@@ -196,7 +213,7 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
         if (transparentLine) return // Invisible lines — skip drawing
 
         linePaint.color = if (isError) errorColor else hitColor
-        linePaint.strokeWidth = max(2f, circleRadius * 0.15f)
+        linePaint.strokeWidth = 1f * density  // JS 版 line height:1dp
 
         for (i in 0 until selectedPoints.size - 1) {
             val from = selectedPoints[i]

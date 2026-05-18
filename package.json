@@ -1,6 +1,6 @@
 {
   "name": "react-native-gesture-password-android",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A native Android pattern lock component for React Native, with same API as react-native-gesture-password. Android native only, iOS unsupported.",
   "main": "src/index.js",
   "files": [

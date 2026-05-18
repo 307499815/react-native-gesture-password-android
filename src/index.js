@@ -46,6 +46,9 @@ class GesturePassword extends Component {
     innerCircle: PropTypes.bool,
     outerCircle: PropTypes.bool,
     transparentLine: PropTypes.bool,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    boardStyle: PropTypes.object,
     onStart: PropTypes.func,
     onEnd: PropTypes.func,
     onReset: PropTypes.func,
@@ -64,16 +67,25 @@ class GesturePassword extends Component {
   };
 
   renderNativeAndroid() {
-    const { onStart, onEnd, onReset, normalColor, rightColor, wrongColor, message, style, textStyle, ...rest } = this.props;
+    const { onStart, onEnd, onReset, normalColor, rightColor, wrongColor, message, style, textStyle, width, height, boardStyle, ...rest } = this.props;
 
     const currentColor =
       this.props.status === 'wrong'
         ? this.props.wrongColor
         : this.props.rightColor || '#5FA8FC';
 
+    // Build container style: flex:1 by default, with optional width/height
+    const containerStyle = [{ flex: 1 }, style];
+    if (width != null || height != null) {
+      const sizeStyle = {};
+      if (width != null) sizeStyle.width = width;
+      if (height != null) sizeStyle.height = height;
+      containerStyle.push(sizeStyle);
+    }
+
     const nativeProps = {
       ...rest,
-      style: [{ flex: 1 }, style],
+      style: containerStyle,
       normalColor: normalColor || '#5FA8FC',
       rightColor: rightColor || '#5FA8FC',
       wrongColor: wrongColor || '#D93609',
@@ -89,7 +101,7 @@ class GesturePassword extends Component {
     };
 
     return (
-      <View style={[{ flex: 1 }, style]}>
+      <View style={containerStyle}>
         {message ? (
           <View style={messageContainerStyle}>
             <Text style={[{ color: currentColor, fontSize: 14 }, textStyle]}>
@@ -99,7 +111,7 @@ class GesturePassword extends Component {
         ) : null}
         <NativePatternLocker
           {...nativeProps}
-          style={[{ flex: 1 }, style]}
+          style={containerStyle}
         />
         {this.props.children}
       </View>
