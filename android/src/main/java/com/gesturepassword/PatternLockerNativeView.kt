@@ -73,7 +73,7 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
     // ==== Paint objects ====
     private val circleBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        strokeWidth = 3f
+        strokeWidth = 4f
     }
     private val circleFillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
