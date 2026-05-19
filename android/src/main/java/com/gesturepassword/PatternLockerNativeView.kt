@@ -73,19 +73,19 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
     // ==== Paint objects ====
     private val circleBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        strokeWidth = 4f
+        strokeWidth = 5f
     }
     private val circleFillPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
     }
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        strokeWidth = 4f
+        strokeWidth = 5f
         strokeCap = Paint.Cap.ROUND
     }
     private val activeLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        strokeWidth = 4f
+        strokeWidth = 5f
         strokeCap = Paint.Cap.ROUND
     }
 
@@ -96,7 +96,7 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
     private var gridOffsetX = 0f
     private var gridOffsetY = 0f
     private var squareSize = 0f
-    private var outerStrokeWidth = 3f
+    private var outerStrokeWidth = 5f
     private var density = 0f
 
     // ==== Touch listener interface ====
@@ -134,7 +134,7 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
         // 对齐 JS 版：JS 用 dp 值，Canvas 用 px 值，需要 density 换算
         // JS borderWidth:2dp → px = 2 * density
         // JS line height:1dp → px = 1 * density
-        outerStrokeWidth = 2f * density
+        outerStrokeWidth = 2.0f * density
         linePaint.strokeWidth = 1f * density
         activeLinePaint.strokeWidth = 1f * density
 
@@ -147,7 +147,6 @@ class PatternLockerNativeView(context: Context) : FrameLayout(context) {
         circleRadius = radius
         innerCircleRadius = radius * 0.33f
         gridSpacing = radius * 3f
-        outerStrokeWidth = 3f
         squareSize = gridSpacing
 
         // 九宫格在 View 中居中（JS 版 board 容器宽=Width=10r，总宽=8r，左右各留 r）
