@@ -27,15 +27,8 @@ android {
         targetSdkVersion safeExtGet('targetSdkVersion', 28)
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
+    // JVM target is intentionally owned by the consuming app's Android toolchain.
+    // Keeping it unset allows both legacy Java 8 hosts and modern Java 17 hosts.
     lintOptions {
         abortOnError false
     }
